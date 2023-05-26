@@ -3,7 +3,7 @@
 ## FLASK
   - flask_jwt_extended
   - flask_sqlalchemy
-  psycopg2
+  - psycopg2
 ## JAVASCRIPT
 ## REACT
   - REDUX/TOOLKIT
