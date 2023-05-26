@@ -1,16 +1,16 @@
-#TECHNOLOGIES /br
-PYTHON
+# TECHNOLOGIES 
+## PYTHON
   validators
-FLASK
+## FLASK
   flask_jwt_extended
   flask_sqlalchemy
   psycopg2
-JAVASCRIPT
-REACT
+## JAVASCRIPT
+## REACT
   REDUX/TOOLKIT
   REACT-BOOTSTRAP
   REACT-ROUTER
-MAPBOX API
+## MAPBOX API
 
 
 # Getting Started with Create React App
