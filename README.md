@@ -1,6 +1,5 @@
 # TECHNOLOGIES 
 ## PYTHON
-  - validators
 ## FLASK
   - flask_jwt_extended
   - flask_sqlalchemy
