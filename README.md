@@ -1,15 +1,15 @@
 # TECHNOLOGIES 
 ## PYTHON
-  validators
+  - validators
 ## FLASK
-  flask_jwt_extended
-  flask_sqlalchemy
+  - flask_jwt_extended
+  - flask_sqlalchemy
   psycopg2
 ## JAVASCRIPT
 ## REACT
-  REDUX/TOOLKIT
-  REACT-BOOTSTRAP
-  REACT-ROUTER
+  - REDUX/TOOLKIT
+  - REACT-BOOTSTRAP
+  - REACT-ROUTER
 ## MAPBOX API
 
 
