@@ -1,10 +1,8 @@
 import './App.css';
-import { Container, Form } from "react-bootstrap";
-
 
 import "mapbox-gl/dist/mapbox-gl.css"
 import Header from './components/Header';
-import MapPart from './components/MapPart';
+// import MapPart from './components/MapPart';
 import CesarOrPlebei from "./components/CesarOrPeblei.jsx"
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
