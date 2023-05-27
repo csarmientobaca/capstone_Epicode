@@ -1,3 +1,18 @@
+# TECHNOLOGIES 
+## PYTHON
+## JAVASCRIPT
+## FLASK
+  - flask_jwt_extended
+  - flask_sqlalchemy
+  - psycopg2
+
+## REACT
+  - REDUX/TOOLKIT
+  - REACT-BOOTSTRAP
+  - REACT-ROUTER
+## MAPBOX API
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
