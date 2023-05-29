@@ -69,7 +69,7 @@
 
 .roman-navbar {
   background-color: #8c2101;
-  position: sticky;
+
   /* or absolute, fixed, or sticky */
-  z-index: 99;
+  z-index: 10;
 }
