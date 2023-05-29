@@ -20,28 +20,40 @@ function MapPart() {
         paint: {
             'fill-color': [
                 'match',
-                ['get', 'iso_3166_1_alpha_2'], // Replace 'iso_3166_1_alpha_2' with the country code property in your data
-                'AL', '#ff0000', // Albania colored red
-                'AT', '#ff0000', // Austria colored red
-                'BE', '#ff0000', // Belgium colored red
-                // Add more country codes and colors for other European countries
+                ['get', 'iso_3166_1_alpha_3'], // Replace 'iso_3166_1_alpha_2' with the country code property in your data
+                'IT', '#ff0000', // Italy colored red
                 '#ffffff' // Default color for countries not matched above (white)
             ],
             'fill-opacity': 0.8,
         },
     };
 
+    const mapClickHandler = (event) => {
+        const features = event.target.queryRenderedFeatures(event.point, {
+            layers: ['countries'] // replace with your layer id
+        });
 
+        if (features && features.length > 0) {
+            const country = features[0];
+
+            if (country.properties.iso_3166_1_alpha_2 === 'IT') {
+                alert('You clicked Italy!');
+            }
+        }
+    };
     return (
         <>
-            <Container>
+            <Container className="map">
 
                 <ReactMapGl
                     {...viewport}
+                    onClick={mapClickHandler} // handle map click
                     mapboxAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
                     onViewportChange={viewport => {
                         setViewport(viewport);
                     }}
+                    scrollZoom={{ speed: 0.5 }} // allow scroll zooming
+                    interactive={true} // ensure the map is interactive
                     width="100%"
                     height="100%"
                     style={{ width: 1200, height: 720 }}

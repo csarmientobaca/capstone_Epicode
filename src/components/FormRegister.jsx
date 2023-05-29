@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Container } from 'react-bootstrap';
 
 const FormRegister = () => {
     const [username, setUsername] = useState('');
@@ -36,7 +36,7 @@ const FormRegister = () => {
     };
 
     return (
-        <div>
+        <Container>
             < Form onSubmit={handleSubmit}>
                 <Form.Group controlId="formUsername">
                     <Form.Label>Username</Form.Label>
@@ -72,7 +72,7 @@ const FormRegister = () => {
                     Register
                 </Button>
             </Form>
-        </div >
+        </Container>
     )
 }
 
