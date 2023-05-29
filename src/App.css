@@ -37,3 +37,39 @@
     transform: rotate(360deg);
   }
 }
+
+
+/* my css*/
+
+
+@media (min-width: 992px) {
+
+  .navbar-brand-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+
+@media (min-width: 992px) {
+
+  .icon-large-spacing {
+    margin: 0 10px;
+  }
+}
+
+
+.brand-logo {
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(255, 255, 35, 0.576);
+  width: 100px;
+  height: 100px;
+}
+
+.roman-navbar {
+  background-color: #8c2101;
+  position: sticky;
+  /* or absolute, fixed, or sticky */
+  z-index: 99;
+}

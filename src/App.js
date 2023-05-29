@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ProfilePage from './components/ProfilePage';
 
 import NavBar from './components/NavBar';
+import MapPart from './components/MapPart';
 
 
 function App() {
@@ -19,6 +20,8 @@ function App() {
           <Route path='/' element={<CesarOrPlebei />} />
           <Route path='/login' element={<FormLogin />} />
           <Route path='/profile' element={<ProfilePage />} />
+          <Route path='/map' element={<MapPart />} />
+
 
           {/* <Container>
           <Header />

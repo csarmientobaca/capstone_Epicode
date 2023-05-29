@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Source, Layer } from 'react-map-gl';
 
 import "mapbox-gl/dist/mapbox-gl.css"
+import { Container } from "react-bootstrap";
 
 function MapPart() {
 
@@ -32,29 +33,31 @@ function MapPart() {
 
 
     return (
-        <div>
+        <>
+            <Container>
 
-            <ReactMapGl
-                {...viewport}
-                mapboxAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-                onViewportChange={viewport => {
-                    setViewport(viewport);
-                }}
-                width="100%"
-                height="100%"
-                style={{ width: 600, height: 400 }}
-                mapStyle="mapbox://styles/csarmientobaca/clhhvfzs601go01pg4v972sox"
-            >
-                <Source
-                    id="countries"
-                    type="vector"
-                    url="mapbox://mapbox.country-boundaries-v1"
+                <ReactMapGl
+                    {...viewport}
+                    mapboxAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+                    onViewportChange={viewport => {
+                        setViewport(viewport);
+                    }}
+                    width="100%"
+                    height="100%"
+                    style={{ width: 1200, height: 720 }}
+                    mapStyle="mapbox://styles/csarmientobaca/clhhvfzs601go01pg4v972sox"
                 >
-                    <Layer {...layerStyle} />
-                </Source>
-            </ReactMapGl>
+                    <Source
+                        id="countries"
+                        type="vector"
+                        url="mapbox://mapbox.country-boundaries-v1"
+                    >
+                        <Layer {...layerStyle} />
+                    </Source>
+                </ReactMapGl>
 
-        </div >
+            </Container>
+        </>
     );
 }
 
