@@ -1,11 +1,11 @@
 import React from 'react';
 // import FormRegister from './FormRegister';
-import FormLogin from './FormLogin';
+import FormRegister from './FormRegister';
 const CesarOrPlebei = () => {
     return (
         <div>
             <h1>Cesar Or Plebei</h1>
-            <FormLogin />
+            <FormRegister />
         </div>
     );
 };

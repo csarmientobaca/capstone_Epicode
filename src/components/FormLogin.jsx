@@ -1,78 +1,101 @@
-import React, { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Form, Button, Container, Card, Row } from 'react-bootstrap';
 
 const FormLogin = () => {
-    const [email, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const token = sessionStorage.getItem("token")
+    const [userData, setUserData] = useState(null);
+    const navigate = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault();
 
         const opts = {
-            method: "POST",
+            method: 'POST',
             headers: {
-                "Content-Type": "application/json"
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 email: email,
                 password: password,
             })
-        }
-        // Handle registration logic here (e.g., validation, server request)
-        fetch("http://127.0.0.1:5000/token", opts)
+        };
+
+        fetch('http://127.0.0.1:5000/api/v1/auth/login', opts)
             .then(resp => {
                 if (resp.status === 200) return resp.json();
-                else alert("some error")
+                else alert('Login error');
             })
             .then(data => {
-                console.log("hi from backend", data)
-                sessionStorage.setItem("token", data.access_token)
+                console.log('hi from backend', data);
+                sessionStorage.setItem('token', data.access_token);
+                getUserData();
+                navigate('/profile');
             })
             .catch(error => {
-                console.log("another error", error)
+                console.log('Login error', error);
+            });
+    };
+
+    const getUserData = () => {
+        const token = sessionStorage.getItem('token');
+
+        fetch('http://127.0.0.1:5000/api/v1/auth/me', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+            .then(resp => {
+                if (resp.status === 200) return resp.json();
+                else throw new Error('Failed to fetch user data');
             })
-
-
-
-        console.log('Form submitted!');
+            .then(userData => {
+                console.log('User data from backend:', userData);
+                setUserData(userData);
+            })
+            .catch(error => {
+                console.log('User data fetch error:', error);
+            });
     };
 
     return (
-        <div>
+        <>
+            <Container>
+                <Row className="justify-content-md-center">
+                    <Form onSubmit={handleSubmit}>
 
-            {token && token !== "" && token !== undefined ? (
-                "you are logged in with this token" + token
-            ) : (
+                        <Form.Group controlId="formEmail">
+                            <Form.Label>Email</Form.Label>
+                            <Form.Control
+                                type="email"
+                                placeholder="Enter email"
+                                value={email}
+                                onChange={event => setEmail(event.target.value)}
+                            />
+                        </Form.Group>
 
-                < Form onSubmit={handleSubmit}>
-                    <Form.Group controlId="formUsername">
-                        <Form.Label>Email</Form.Label>
-                        <Form.Control
-                            type="text"
-                            placeholder="Enter username"
-                            value={email}
-                            onChange={(event) => setUsername(event.target.value)}
-                        />
-                    </Form.Group>
+                        <Form.Group controlId="formPassword">
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control
+                                type="password"
+                                placeholder="Enter password"
+                                value={password}
+                                onChange={event => setPassword(event.target.value)}
+                            />
+                        </Form.Group>
 
-                    <Form.Group controlId="formPassword">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control
-                            type="password"
-                            placeholder="Enter password"
-                            value={password}
-                            onChange={(event) => setPassword(event.target.value)}
-                        />
-                    </Form.Group>
+                        <Button variant="primary" type="submit">
+                            Login
+                        </Button>
+                    </Form>
 
-                    <Button variant="primary" type="submit">
-                        Login
-                    </Button>
-                </Form>
-            )}</div >
-    )
-}
+                    {userData && <h1>Welcome, {userData.username}!</h1>}
+                </Row>
+            </Container>
 
+        </>
+    );
+};
 
 export default FormLogin;

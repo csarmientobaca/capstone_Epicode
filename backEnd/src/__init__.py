@@ -4,7 +4,7 @@ import psycopg2
 from dotenv import load_dotenv
 from flask_jwt_extended import JWTManager
 
-
+from flask_cors import CORS
 from src.auth import auth
 from src.propietautente import propietautente
 from src.database import db
@@ -14,6 +14,7 @@ load_dotenv()
 
 def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
+    CORS(app)
 
     url = os.environ.get("DATABASE_URL")
 
