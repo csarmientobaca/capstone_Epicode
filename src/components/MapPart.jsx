@@ -1,61 +1,96 @@
 import ReactMapGl from "react-map-gl"
-import { useState } from 'react';
-import { Source, Layer } from 'react-map-gl';
+import { useState, useEffect, useMemo } from 'react';
+import { Source, Layer, Marker } from 'react-map-gl';
 
 import "mapbox-gl/dist/mapbox-gl.css"
 import { Container } from "react-bootstrap";
 
+import Pin from './Pin';
+
+import CITIES from './cities.json';
+import romaEagle from '../imgPub/romaEagle.jpg';
+
+
+
 function MapPart() {
+    const [popupInfo, setPopupInfo] = useState(null);
 
     const [viewport, setViewport] = useState(
         {
             latitude: 41.9027835,
             longitude: 12.4963655,
-            zoom: 3
+            zoom: 2
         }
     )
+
     const layerStyle = {
-        id: 'countries',
-        type: 'fill',
-        paint: {
-            'fill-color': [
-                'match',
-                ['get', 'iso_3166_1_alpha_3'], // Replace 'iso_3166_1_alpha_2' with the country code property in your data
-                'IT', '#ff0000', // Italy colored red
-                '#ffffff' // Default color for countries not matched above (white)
-            ],
-            'fill-opacity': 0.8,
+        'id': 'country-boundaries',
+        'source-layer': 'country_boundaries',
+        'type': 'fill',
+        'paint': {
+            'fill-color': '#d2361e',
+            'fill-opacity': 0.4,
         },
     };
 
-    const mapClickHandler = (event) => {
-        const features = event.target.queryRenderedFeatures(event.point, {
-            layers: ['countries'] // replace with your layer id
-        });
+    const [filter, setFilter] = useState([
+        "in",
+        "iso_3166_1_alpha_3",
+        'NLD',
+        'ITA'
+    ]);
 
-        if (features && features.length > 0) {
-            const country = features[0];
 
-            if (country.properties.iso_3166_1_alpha_2 === 'IT') {
-                alert('You clicked Italy!');
-            }
-        }
-    };
+    useEffect(() => {
+        setFilter([
+            "in",
+            "iso_3166_1_alpha_3",
+            'ITA',
+            'FRA',
+            'ESP',
+            'PRT',
+            'HRV',
+            'SVN',
+            'BEL',
+            'GBR',
+            'BIH',
+            'CHE',
+            'AUT'
+        ]);
+    }, []);
+
+    const pins = useMemo(
+        () =>
+            CITIES.map((city, index) => (
+                <Marker
+                    key={`marker-${index}`}
+                    draggable="True"
+                    longitude={city.longitude}
+                    latitude={city.latitude}
+                    offsetTop={-20}
+                    onClick={e => {
+                        e = console.log("hi")
+                    }}
+                >
+                    <Pin />
+                </Marker>
+            )),
+        []
+    );
+
     return (
         <>
             <Container className="map">
 
                 <ReactMapGl
                     {...viewport}
-                    onClick={mapClickHandler} // handle map click
                     mapboxAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
                     onViewportChange={viewport => {
                         setViewport(viewport);
                     }}
-                    scrollZoom={{ speed: 0.5 }} // allow scroll zooming
-                    interactive={true} // ensure the map is interactive
                     width="100%"
                     height="100%"
+                    zoom="3.6"
                     style={{ width: 1200, height: 720 }}
                     mapStyle="mapbox://styles/csarmientobaca/clhhvfzs601go01pg4v972sox"
                 >
@@ -64,11 +99,13 @@ function MapPart() {
                         type="vector"
                         url="mapbox://mapbox.country-boundaries-v1"
                     >
-                        <Layer {...layerStyle} />
+                        <Layer {...layerStyle} filter={filter} />
                     </Source>
+
+                    {pins}
                 </ReactMapGl>
 
-            </Container>
+            </Container >
         </>
     );
 }
