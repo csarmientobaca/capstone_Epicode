@@ -21,12 +21,6 @@ function App() {
           <Route path='/login' element={<FormLogin />} />
           <Route path='/profile' element={<ProfilePage />} />
           <Route path='/map' element={<MapPart />} />
-
-
-          {/* <Container>
-          <Header />
-          <MapPart />
-        </Container> */}
         </Routes>
       </BrowserRouter>
 

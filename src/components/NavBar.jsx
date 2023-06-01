@@ -18,10 +18,10 @@ function NavBar() {
 
                     <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
                         <Nav>
-                            <Nav.Link href="#home">Home</Nav.Link>
-                            <Nav.Link href="#profilo">Profile</Nav.Link>
-                            <Nav.Link href="#registrazione">Registrazione</Nav.Link>
-                            <Nav.Link href="#login">Login</Nav.Link>
+                            <Nav.Link href="/map">Home</Nav.Link>
+                            <Nav.Link href="/profilo">Profile</Nav.Link>
+                            <Nav.Link href="/">Registrazione</Nav.Link>
+                            <Nav.Link href="/login">Login</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
