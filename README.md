@@ -11,7 +11,7 @@
   - REACT-BOOTSTRAP
   - REACT-ROUTER
 ## MAPBOX API
-## elephantsql AS EXTERNAL DATABASE
+## ELEPHANTSQL AS EXTERNAL DATABASE
 
 # Getting Started with Create React App
 
