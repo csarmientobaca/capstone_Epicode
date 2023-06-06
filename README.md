@@ -13,6 +13,13 @@
 ## MAPBOX API
 ## ELEPHANTSQL AS EXTERNAL DATABASE
 
+
+To run the backend with flask.
+  - open the terminal in: /backEnd
+  - use this in the terminal: source .venv/bin/activate
+  - then use this:  flask run
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
