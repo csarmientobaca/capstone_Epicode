@@ -8,7 +8,6 @@ from flask_jwt_extended import (
     get_jwt_identity,
 )
 
-
 from src.constants.http_status_codes import (
     HTTP_200_OK,
     HTTP_201_CREATED,

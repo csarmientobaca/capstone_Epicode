@@ -1,6 +1,6 @@
 import ReactMapGl from "react-map-gl"
 import { useState, useEffect, useMemo } from 'react';
-import { Source, Layer, Marker } from 'react-map-gl';
+import { Source, Layer, Marker, Popup } from 'react-map-gl';
 
 import "mapbox-gl/dist/mapbox-gl.css"
 import { Container } from "react-bootstrap";
@@ -8,7 +8,6 @@ import { Container } from "react-bootstrap";
 import Pin from './Pin';
 
 import CITIES from './cities.json';
-import romaEagle from '../imgPub/romaEagle.jpg';
 
 
 
@@ -69,7 +68,8 @@ function MapPart() {
                     latitude={city.latitude}
                     offsetTop={-20}
                     onClick={e => {
-                        e = console.log("hi")
+                        e.originalEvent.stopPropagation();
+                        setPopupInfo(city);
                     }}
                 >
                     <Pin />
@@ -103,6 +103,38 @@ function MapPart() {
                     </Source>
 
                     {pins}
+                    {popupInfo && (
+                        <Popup
+                            anchor="top"
+                            longitude={Number(popupInfo.longitude)}
+                            latitude={Number(popupInfo.latitude)}
+                            onClose={() => setPopupInfo(null)}
+                        >
+                            <div>
+                                <h1>
+                                    {popupInfo.city}
+                                </h1>
+                                <a
+                                    target="_new"
+                                    href={`http://en.wikipedia.org/w/index.php?title=Special:Search&search=${popupInfo.city}`}
+                                >
+                                    Wikipedia
+                                </a>
+                                <div>
+
+                                    <a
+                                        href="/"
+                                    >
+                                        <h3>
+                                            Register as Plebei Of this city
+                                        </h3>
+                                    </a>
+                                </div>
+                            </div>
+                            <img width="100%" src={popupInfo.image} />
+                        </Popup>
+                    )}
+
                 </ReactMapGl>
 
             </Container >

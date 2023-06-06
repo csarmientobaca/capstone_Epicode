@@ -7,6 +7,7 @@ from flask_jwt_extended import JWTManager
 from flask_cors import CORS
 from src.auth import auth
 from src.propietautente import propietautente
+from src.cesar import cesar
 from src.database import db
 
 load_dotenv()
@@ -35,5 +36,6 @@ def create_app(test_config=None):
 
     app.register_blueprint(auth)
     app.register_blueprint(propietautente)
+    app.register_blueprint(cesar)
 
     return app
