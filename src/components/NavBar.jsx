@@ -6,7 +6,7 @@ import romaEagle from '../imgPub/romaEagle.jpg';
 function NavBar() {
     return (
         <>
-            <Container>
+            <Container className="nav-space">
 
                 <Navbar variant="dark" expand="lg" className="roman-navbar" fixed="top">
                     <Navbar.Brand href="#home" className="navbar-brand-center"><img src={romaEagle} alt="Logo" className="brand-logo" /> </Navbar.Brand>

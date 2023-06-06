@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Form, Button, Container } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 const FormRegister = () => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -20,24 +22,28 @@ const FormRegister = () => {
                 password: password,
             })
         }
+
         fetch("http://127.0.0.1:5000/api/v1/auth/register", opts)
             .then(resp => {
-                if (resp.status === 201) return resp.json();
-                else alert("Registration error")
-            })
-            .then(data => {
-                console.log("User registered", data)
+                if (resp.status === 201) {
+                    console.log("User registered");
+                    alert("Registration successful");
+                    navigate('/login'); // Navigate to the login page
+                } else {
+                    throw new Error("Registration error");
+                }
             })
             .catch(error => {
-                console.log("Registration error", error)
-            })
+                console.log("Registration error", error);
+                alert("Registration error");
+            });
 
         console.log('Form submitted!');
     };
 
     return (
         <Container>
-            < Form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="formUsername">
                     <Form.Label>Username</Form.Label>
                     <Form.Control
@@ -73,7 +79,7 @@ const FormRegister = () => {
                 </Button>
             </Form>
         </Container>
-    )
-}
+    );
+};
 
 export default FormRegister;
