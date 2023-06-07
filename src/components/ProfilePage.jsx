@@ -11,7 +11,9 @@ const ProfilePage = () => {
     useEffect(() => {
         const token = sessionStorage.getItem('token');
         if (token) {
-            fetchUserData(token);
+            setTimeout(() => {
+                fetchUserData(token);
+            }, 1000); // Add a delay of 1 second (adjust as needed)
         }
     }, []);
 

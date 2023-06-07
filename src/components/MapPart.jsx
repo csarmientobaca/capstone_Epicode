@@ -80,7 +80,7 @@ function MapPart() {
 
     return (
         <>
-            <Container className="map">
+            <Container className="map mt-5">
 
                 <ReactMapGl
                     {...viewport}

@@ -1,48 +1,65 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Button, Container } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setUser, login } from '../redux/actions/actions';
+import axios from 'axios';
 
 const FormRegister = () => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
-    const handleSubmit = (event) => {
+    useEffect(() => {
+        const token = sessionStorage.getItem('token');
+        if (token) {
+            navigate('/login'); // Navigate to the login page
+        }
+    }, [navigate]);
+
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
-        const opts = {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                username: username,
-                email: email,
-                password: password,
-            })
-        }
-
-        fetch("http://127.0.0.1:5000/api/v1/auth/register", opts)
-            .then(resp => {
-                if (resp.status === 201) {
-                    console.log("User registered");
-                    alert("Registration successful");
-                    navigate('/login'); // Navigate to the login page
-                } else {
-                    throw new Error("Registration error");
-                }
-            })
-            .catch(error => {
-                console.log("Registration error", error);
-                alert("Registration error");
+        try {
+            const response = await axios.post('http://127.0.0.1:5000/api/v1/auth/register', {
+                username,
+                email,
+                password,
             });
 
-        console.log('Form submitted!');
+            if (response.status === 201) {
+                console.log('User registered');
+                alert('Registration successful');
+                const token = response.data.token;
+                const storedToken = sessionStorage.getItem('token'); // Get the token from sessionStorage
+                if (!storedToken) {
+                    sessionStorage.setItem('token', token); // Save the token
+                }
+                dispatch(login(email, password)); // Log in the user
+                navigate('/login'); // Navigate to the login page
+                dispatch(setUser(response.data.user)); // Update the user state in Redux
+            } else {
+                throw new Error('Registration error');
+            }
+        } catch (error) {
+            console.log('Registration error', error);
+            alert('Registration error');
+        }
     };
 
+    const storedToken = sessionStorage.getItem('token');
+    if (storedToken) {
+        return (
+            <Container>
+                <h2>You are already registered and logged in.</h2>
+            </Container>
+        );
+    }
+
     return (
-        <Container>
+        <Container className='mt-5'>
             <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="formUsername">
                     <Form.Label>Username</Form.Label>
