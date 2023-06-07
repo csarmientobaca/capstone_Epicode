@@ -1,7 +1,7 @@
 # import os
 # import psycopg2
 # from dotenv import load_dotenv
-from flask import Flask, request, jsonify, url_for, Blueprint
+# from flask import Flask, request, jsonify, url_for, Blueprint
 
 # from flask_cors import CORS
 
@@ -13,7 +13,7 @@ from flask import Flask, request, jsonify, url_for, Blueprint
 # load_dotenv()
 
 # reate flask app
-app = Flask(__name__)
+# app = Flask(__name__)
 # CORS(app)
 
 # # Setup the Flask-JWT-Extended extension

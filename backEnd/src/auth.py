@@ -17,7 +17,7 @@ from src.constants.http_status_codes import (
 )
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from src.database import User, db, PropietaUtente
+from src.database import User, db, PropietaUtente, Cesar
 
 auth = Blueprint("auth", __name__, url_prefix="/api/v1/auth")
 
@@ -30,13 +30,13 @@ def register():
 
     if len(password) < 5:
         return (
-            jsonify({"error": "usa una password piu lunga di 5 carateri"}),
+            jsonify({"error": "usa una password piu lunga di 5 caratteri"}),
             HTTP_400_BAD_REQUEST,
         )
 
     if len(username) < 3:
         return (
-            jsonify({"error": "usa un user piu lunga di 3 caratteri"}),
+            jsonify({"error": "usa un user piu lungo di 3 caratteri"}),
             HTTP_400_BAD_REQUEST,
         )
 
@@ -60,11 +60,15 @@ def register():
 
     pwd_hash = generate_password_hash(password)
 
-    user = User(username=username, password=pwd_hash, email=email)
+    cesar_id = 1
 
+    cesar = Cesar.query.get(cesar_id)
+    if cesar is None:
+        return jsonify({"error": "Cesar not found"}), HTTP_400_BAD_REQUEST
+
+    user = User(username=username, password=pwd_hash, email=email, cesar=cesar)
     propietautente = PropietaUtente(gold=100, bestiame=2, kids=0)
-
-    user.propietaUser = propietautente  # Assign the PropietaUtente instance to the User's propietaUser attribute
+    user.propietaUser = propietautente
 
     db.session.add(user)
     db.session.commit()

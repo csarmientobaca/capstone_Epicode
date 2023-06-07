@@ -131,7 +131,7 @@ function MapPart() {
                                     </a>
                                 </div>
                             </div>
-                            <img width="100%" src={popupInfo.image} />
+                            {/* <img width="100%" src={popupInfo.image} /> */}
                         </Popup>
                     )}
 
