@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Button } from 'react-bootstrap';
+import { Table, Button, Image } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCow, faCoins, faChildren, faEdit } from '@fortawesome/free-solid-svg-icons';
+import plebei from "../imgPub/plebei.png"
+
 
 const ProfilePage = () => {
     const [userData, setUserData] = useState(null);
@@ -140,6 +142,11 @@ const ProfilePage = () => {
                 <Table striped bordered>
                     <tbody>
                         <tr>
+                            <td rowSpan={4}>
+                                <div className='plebei-img'>
+                                    <Image src={plebei} rounded width={200} height={300} />
+                                </div>
+                            </td>
                             <td>Username</td>
                             <td>{userData.username}</td>
                         </tr>
