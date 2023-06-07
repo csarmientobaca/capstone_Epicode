@@ -1,0 +1,53 @@
+.login-form {
+    max-width: 400px;
+    padding: 20px;
+    background: #f8f9fa;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+}
+
+.login-form label {
+    font-weight: bold;
+}
+
+.login-form input[type="email"],
+.login-form input[type="password"] {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.login-form button[type="submit"] {
+    width: 100%;
+}
+
+.plebei-img {
+    max-width: 100px;
+}
+
+/**/
+
+.register-form {
+    max-width: 400px;
+    padding: 20px;
+    background: #f8f9fa;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+}
+
+.register-formlabel {
+    font-weight: bold;
+}
+
+.register-form input[type="email"],
+.register-form input[type="password"] {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.register-form button[type="submit"] {
+    width: 100%;
+}
+
+.plebei-img {
+    max-width: 100px;
+}

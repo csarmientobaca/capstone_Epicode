@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setUser, login } from '../redux/actions/actions';
 import axios from 'axios';
+import './CesarLogin.css';
 
 const FormRegister = () => {
     const [username, setUsername] = useState('');
@@ -15,7 +16,7 @@ const FormRegister = () => {
     useEffect(() => {
         const token = sessionStorage.getItem('token');
         if (token) {
-            navigate('/login'); // Navigate to the login page
+            navigate('/login');
         }
     }, [navigate]);
 
@@ -60,7 +61,7 @@ const FormRegister = () => {
 
     return (
         <Container className='mt-5'>
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit} className="register-form">
                 <Form.Group controlId="formUsername">
                     <Form.Label>Username</Form.Label>
                     <Form.Control

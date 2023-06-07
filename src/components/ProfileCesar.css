@@ -1,0 +1,31 @@
+.profile-table {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.profile-table th {
+    background-color: #24c258;
+    font-weight: bold;
+}
+
+.profile-table td {
+    padding: 10px;
+}
+
+.profile-table .profile-inner-table {
+    margin-bottom: 0;
+}
+
+.profile-table .profile-inner-table th,
+.profile-table .profile-inner-table td {
+    border-top: none;
+    padding: 5px;
+}
+
+.profile-table .profile-inner-table th {
+    width: 200px;
+}
+
+.profile-table .profile-inner-table .fa-icon {
+    margin-right: 5px;
+}

@@ -19,7 +19,7 @@ function NavBar() {
         <>
             <Container className="nav-space">
                 <Navbar variant="dark" expand="lg" className="roman-navbar" fixed="top">
-                    <Navbar.Brand as={Link} to="/" className="navbar-brand-center">
+                    <Navbar.Brand as={Link} to="/logincesar" className="navbar-brand-center">
                         <img src={romaEagle} alt="Logo" className="brand-logo" />
                     </Navbar.Brand>
 

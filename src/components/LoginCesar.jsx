@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Form, Button, Container, Row } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
-import { login } from '../redux/actions/actions';
 import plebei from "../imgPub/plebei.png";
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { loginSuccess, loginFailure } from '../redux/actions/cesaractions';
 import './CesarLogin.css'; // Import the CSS file for styling
 
 const FormLogin = () => {
@@ -12,17 +13,28 @@ const FormLogin = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
-        // Dispatch the login action with email and password
-        dispatch(login(email, password))
-            .then(() => {
-                navigate('/profile');
-            })
-            .catch((error) => {
-                console.log('Login error', error);
+        try {
+            const response = await axios.post('http://127.0.0.1:5000/api/v1/cesar/login', {
+                email,
+                password,
             });
+
+            const token = response.data.cesar.access;
+
+            if (token) {
+                sessionStorage.setItem('token', token);
+                dispatch(loginSuccess(token));
+                navigate('/profilecesar');
+            } else {
+                throw new Error('Invalid response format: Missing token');
+            }
+        } catch (error) {
+            console.log('Login error', error);
+            dispatch(loginFailure(error.message));
+        }
     };
 
     const token = sessionStorage.getItem('token');
@@ -32,7 +44,7 @@ const FormLogin = () => {
             <Container>
                 <Row className="justify-content-md-center mt-5">
                     <div>
-                        <Link to="/profile">
+                        <Link to="/profilecesar">
                             <img className='plebei-img m-5 ps-5' src={plebei} alt="Plebei" />
                         </Link>
                         <h2>You are logged in, go to your profile.</h2>
